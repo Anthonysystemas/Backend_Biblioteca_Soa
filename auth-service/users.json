@@ -1,0 +1,51 @@
+[
+  {
+    "id": 1,
+    "username": "juan123",
+    "email": "juan@email.com",
+    "password": "$2b$12$9Tqed9bdfvCcxv2bzmLqEOnhUssBDvfEeclI/E.LWlbTwSTjj6be.",
+    "created_at": "2025-09-21T23:32:09.030563"
+  },
+  {
+    "id": 2,
+    "username": "maria",
+    "email": "maria@gmail.com",
+    "password": "$2b$12$PRHtWaLeAFJAYqWX3g7OMeb67wxyLNQp2Lc1IDxM/aFbppzt.6G4S",
+    "created_at": "2025-09-21T23:33:02.547718"
+  },
+  {
+    "id": 3,
+    "username": "conor",
+    "email": "conor@gmail.com",
+    "password": "$2b$12$EcsIsMfJig0QYiDYQoq0xuJPXaqt3jvc6EwD6RLG5lUZvZOtuX4pa",
+    "created_at": "2025-09-21T23:36:16.558762"
+  },
+  {
+    "id": 4,
+    "username": "luis_suarez",
+    "email": "luis@email.com",
+    "password": "$2b$12$tFCVPmVYfY1fK7eGH5YrWu57CZcthq0ApjK9niNDT/B4pPMCCI7Aa",
+    "created_at": "2025-09-22T01:53:02.463486"
+  },
+  {
+    "id": 5,
+    "username": "testuser",
+    "email": "test@biblioteca.com",
+    "password": "$2b$12$efvtXedtxk.elme6meHsQuPvlIMg4KhrT.R6358SFPi5dxs5JTssO",
+    "created_at": "2025-09-22T02:45:45.061379"
+  },
+  {
+    "id": 6,
+    "username": "nuevo_usuario",
+    "email": "usuario@biblioteca.com",
+    "password": "$2b$12$9936OnKJ5WyC0BZIUOjarOoUXLQSKW7FVbzwHvs6K.VyYiPVEDhU6",
+    "created_at": "2025-09-22T02:58:08.602588"
+  },
+  {
+    "id": 7,
+    "username": "anthony",
+    "email": "anthony@biblioteca.com",
+    "password": "$2b$12$udzXzr7wgEZcziks0CJBT.uTfXonu1ujhSN0tVKEJM33Crh3P/gLi",
+    "created_at": "2025-09-22T03:29:24.798832"
+  }
+]

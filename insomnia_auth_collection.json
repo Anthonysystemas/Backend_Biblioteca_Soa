@@ -1,0 +1,146 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-22T02:50:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_auth_health",
+      "parentId": "fld_auth_service",
+      "modified": 1695340200000,
+      "created": 1695340200000,
+      "url": "http://localhost:8000/",
+      "name": "Health Check",
+      "description": "Verificar estado del servicio de autenticación",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1695340200000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_register",
+      "parentId": "fld_auth_service",
+      "modified": 1695340300000,
+      "created": 1695340300000,
+      "url": "http://localhost:8000/register",
+      "name": "Register User",
+      "description": "Registrar un nuevo usuario en el sistema",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"nuevo_usuario\",\n  \"email\": \"usuario@biblioteca.com\",\n  \"password\": \"mipassword123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1695340300000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_login",
+      "parentId": "fld_auth_service",
+      "modified": 1695340400000,
+      "created": 1695340400000,
+      "url": "http://localhost:8000/login",
+      "name": "Login User",
+      "description": "Iniciar sesión y obtener JWT token",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"username\": \"nuevo_usuario\",\n  \"password\": \"mipassword123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1695340400000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_verify",
+      "parentId": "fld_auth_service",
+      "modified": 1695340500000,
+      "created": 1695340500000,
+      "url": "http://localhost:8000/verify",
+      "name": "Verify Token",
+      "description": "Verificar si un JWT token es válido",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"token\": \"PEGAR_TOKEN_JWT_AQUI\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1695340500000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_auth_service",
+      "parentId": "wrk_biblioteca",
+      "modified": 1695340100000,
+      "created": 1695340100000,
+      "name": "Auth Service",
+      "description": "Endpoints del servicio de autenticación",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1695340100000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_biblioteca",
+      "parentId": null,
+      "modified": 1695340000000,
+      "created": 1695340000000,
+      "name": "SOA Biblioteca Digital",
+      "description": "API collection para el sistema SOA de biblioteca digital",
+      "scope": "collection",
+      "_type": "workspace"
+    }
+  ]
+}

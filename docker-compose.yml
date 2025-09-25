@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "8000:8000"  # Puerto correcto para auth-service
+    volumes:
+      - ./auth-service/users.json:/app/users.json  # Sincronizar archivo de usuarios
+    networks:
+      - soa-network
+    
+  catalog-service:
+    build: ./catalog-service
+    ports:
+      - "8001:8001"  # Puerto correcto para catalog-service
+    volumes:
+      - ./catalog-service/books.json:/app/books.json
+      - ./catalog-service/categories.json:/app/categories.json
+    depends_on:
+      - auth-service
+    networks:
+      - soa-network
+
+networks:
+  soa-network:
+    driver: bridge
