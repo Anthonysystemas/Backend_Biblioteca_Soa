@@ -1,27 +1,28 @@
-version: '3.8'
-
 services:
-  auth-service:
-    build: ./auth-service
-    ports:
-      - "8000:8000"  # Puerto correcto para auth-service
-    volumes:
-      - ./auth-service/users.json:/app/users.json  # Sincronizar archivo de usuarios
-    networks:
-      - soa-network
-    
-  catalog-service:
-    build: ./catalog-service
-    ports:
-      - "8001:8001"  # Puerto correcto para catalog-service
-    volumes:
-      - ./catalog-service/books.json:/app/books.json
-      - ./catalog-service/categories.json:/app/categories.json
-    depends_on:
-      - auth-service
-    networks:
-      - soa-network
+  api:
+    build: .
+    env_file: .env
+    ports: ["8080:8080"]
+    depends_on: [redis]
+    restart: unless-stopped
 
-networks:
-  soa-network:
-    driver: bridge
+  worker:
+    build:
+      context: .
+      dockerfile: worker.Dockerfile
+    env_file: .env
+    environment:
+      - PYTHONPATH=/app
+    command: celery -A infrastructure.celery_app.celery worker -l info
+    depends_on:
+      - redis
+    restart: unless-stopped
+    volumes:
+      - ./app:/app/app
+      - ./infrastructure:/app/infrastructure
+
+  redis:
+    image: redis:7
+    ports: ["6379:6379"]
+    restart: unless-stopped
+
