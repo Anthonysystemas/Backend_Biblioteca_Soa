@@ -1,9 +1,20 @@
 services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lib
+    ports: ["5432:5432"]
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
   api:
     build: .
     env_file: .env
     ports: ["8080:8080"]
-    depends_on: [redis]
+    depends_on: [db, redis]
     restart: unless-stopped
 
   worker:
@@ -15,6 +26,7 @@ services:
       - PYTHONPATH=/app
     command: celery -A infrastructure.celery_app.celery worker -l info
     depends_on:
+      - db
       - redis
     restart: unless-stopped
     volumes:
@@ -25,4 +37,7 @@ services:
     image: redis:7
     ports: ["6379:6379"]
     restart: unless-stopped
+
+volumes:
+  postgres_data:
 
