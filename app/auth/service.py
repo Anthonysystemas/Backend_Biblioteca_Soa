@@ -11,9 +11,9 @@ def login(data: LoginIn) -> Optional[LoginOut]:
     if not user or not verify_password(data.password, user.password_hash):
         return None
 
-    claims = {"roles": ["reader"]}  
-    access = create_access_token(identity=user.id, additional_claims=claims)
-    refresh = create_refresh_token(identity=user.id)
+    claims = {"roles": ["reader"]}
+    access = create_access_token(identity=str(user.id), additional_claims=claims)
+    refresh = create_refresh_token(identity=str(user.id))
     return LoginOut(access_token=access, refresh_token=refresh)
 
 
@@ -25,7 +25,7 @@ def me(user_id: int) -> MeOut:
 
 def refresh(user_id: int) -> RefreshOut:
     claims = {"roles": ["reader"]}
-    new_access = create_access_token(identity=user_id, additional_claims=claims)
+    new_access = create_access_token(identity=str(user_id), additional_claims=claims)
     return RefreshOut(access_token=new_access)
 
 

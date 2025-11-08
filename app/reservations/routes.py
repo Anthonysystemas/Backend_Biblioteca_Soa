@@ -9,7 +9,7 @@ bp = Blueprint("reservations", __name__)
 @bp.post("/")
 @jwt_required()
 def create():
-    uid = get_jwt_identity()
+    uid = int(get_jwt_identity())
     payload = request.get_json() or {}
     book_id = payload.get("book_id")
     if not book_id:

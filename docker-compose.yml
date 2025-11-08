@@ -24,7 +24,7 @@ services:
     env_file: .env
     environment:
       - PYTHONPATH=/app
-    command: celery -A infrastructure.celery_app.celery worker -l info
+    command: celery -A infrastructure.celery_app.celery worker -l info -Q default,reservations
     depends_on:
       - db
       - redis

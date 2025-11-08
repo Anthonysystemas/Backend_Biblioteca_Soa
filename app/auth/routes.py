@@ -45,7 +45,7 @@ def register():
 @jwt_required()
 def me():
     """Datos básicos del usuario autenticado"""
-    uid = get_jwt_identity()
+    uid = int(get_jwt_identity())
     out = me_uc(uid)
     return out.model_dump(), 200
 
@@ -54,6 +54,6 @@ def me():
 @jwt_required(refresh=True)
 def refresh():
     """Emite un nuevo access token usando el refresh token válido"""
-    uid = get_jwt_identity()
+    uid = int(get_jwt_identity())
     out = refresh_uc(uid)
     return out.model_dump(), 200
