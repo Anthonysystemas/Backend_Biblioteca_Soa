@@ -1,0 +1,231 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-11-09T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "wrk_backend_biblioteca",
+      "_type": "workspace",
+      "name": "Backend Biblioteca SOA",
+      "description": "API REST para Sistema de Biblioteca Digital",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8080",
+        "access_token": "",
+        "refresh_token": ""
+      },
+      "parentId": "wrk_backend_biblioteca"
+    },
+    {
+      "_id": "folder_auth",
+      "_type": "request_group",
+      "name": "🔐 Auth",
+      "parentId": "wrk_backend_biblioteca"
+    },
+    {
+      "_id": "req_register",
+      "_type": "request",
+      "name": "Register",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/register",
+      "parentId": "folder_auth",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"full_name\": \"Juan Pérez\",\n  \"email\": \"juan@example.com\",\n  \"password\": \"password123\",\n  \"confirm_password\": \"password123\"\n}"
+      }
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "name": "Login",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/login",
+      "parentId": "folder_auth",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"juan@example.com\",\n  \"password\": \"password123\"\n}"
+      }
+    },
+    {
+      "_id": "req_me",
+      "_type": "request",
+      "name": "Me (Profile)",
+      "method": "GET",
+      "url": "{{ _.base_url }}/auth/me",
+      "parentId": "folder_auth",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_refresh",
+      "_type": "request",
+      "name": "Refresh Token",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/refresh",
+      "parentId": "folder_auth",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.refresh_token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_forgot_password",
+      "_type": "request",
+      "name": "Forgot Password",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/forgot-password",
+      "parentId": "folder_auth",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"juan@example.com\"\n}"
+      }
+    },
+    {
+      "_id": "req_reset_password",
+      "_type": "request",
+      "name": "Reset Password",
+      "method": "POST",
+      "url": "{{ _.base_url }}/auth/reset-password",
+      "parentId": "folder_auth",
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"token\": \"PASTE_TOKEN_FROM_EMAIL\",\n  \"new_password\": \"newpassword123\",\n  \"confirm_password\": \"newpassword123\"\n}"
+      }
+    },
+    {
+      "_id": "folder_catalog",
+      "_type": "request_group",
+      "name": "📚 Catalog",
+      "parentId": "wrk_backend_biblioteca"
+    },
+    {
+      "_id": "req_list_books",
+      "_type": "request",
+      "name": "List Books",
+      "method": "GET",
+      "url": "{{ _.base_url }}/catalog/books",
+      "parentId": "folder_catalog",
+      "parameters": [
+        {
+          "name": "q",
+          "value": "",
+          "description": "Search query (title, author, or ISBN)"
+        }
+      ]
+    },
+    {
+      "_id": "req_get_book",
+      "_type": "request",
+      "name": "Get Book Details",
+      "method": "GET",
+      "url": "{{ _.base_url }}/catalog/books/1",
+      "parentId": "folder_catalog"
+    },
+    {
+      "_id": "folder_reservations",
+      "_type": "request_group",
+      "name": "📝 Reservations",
+      "parentId": "wrk_backend_biblioteca"
+    },
+    {
+      "_id": "req_create_reservation",
+      "_type": "request",
+      "name": "Create Reservation",
+      "method": "POST",
+      "url": "{{ _.base_url }}/reservations/",
+      "parentId": "folder_reservations",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"book_id\": 1\n}"
+      }
+    },
+    {
+      "_id": "req_confirm_reservation",
+      "_type": "request",
+      "name": "Confirm Reservation",
+      "method": "POST",
+      "url": "{{ _.base_url }}/reservations/1/confirm",
+      "parentId": "folder_reservations",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_cancel_reservation",
+      "_type": "request",
+      "name": "Cancel Reservation",
+      "method": "POST",
+      "url": "{{ _.base_url }}/reservations/1/cancel",
+      "parentId": "folder_reservations",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ]
+    },
+    {
+      "_id": "folder_health",
+      "_type": "request_group",
+      "name": "❤️ Health",
+      "parentId": "wrk_backend_biblioteca"
+    },
+    {
+      "_id": "req_health",
+      "_type": "request",
+      "name": "Health Check",
+      "method": "GET",
+      "url": "{{ _.base_url }}/health",
+      "parentId": "folder_health"
+    }
+  ]
+}
