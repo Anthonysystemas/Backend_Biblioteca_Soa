@@ -32,6 +32,28 @@ class RegisterIn(BaseModel):
             raise ValueError('Las contraseñas no coinciden')
         return v
 
+class ForgotPasswordIn(BaseModel):
+    email: EmailStr
+
+class ResetPasswordIn(BaseModel):
+    token: str
+    new_password: str
+    confirm_password: str
+
+    @field_validator('new_password')
+    @classmethod
+    def validate_password(cls, v):
+        if len(v) < 6:
+            raise ValueError('La contraseña debe tener al menos 6 caracteres')
+        return v
+
+    @field_validator('confirm_password')
+    @classmethod
+    def passwords_match(cls, v, info):
+        if 'new_password' in info.data and v != info.data['new_password']:
+            raise ValueError('Las contraseñas no coinciden')
+        return v
+
 # ===== Out =====
 class LoginOut(BaseModel):
     access_token: str
@@ -49,3 +71,10 @@ class MeOut(BaseModel):
 
 class RefreshOut(BaseModel):
     access_token: str
+
+class ForgotPasswordOut(BaseModel):
+    message: str
+    token: str
+
+class ResetPasswordOut(BaseModel):
+    message: str

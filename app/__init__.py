@@ -1,5 +1,5 @@
 from flask import Flask
-from .extensions import db, jwt
+from .extensions import db, jwt, mail
 from .config import Config
 from .auth.routes import bp as auth_bp
 from .catalog.routes import bp as catalog_bp
@@ -12,6 +12,7 @@ def create_app(config_obj=Config):
 
     db.init_app(app)
     jwt.init_app(app)
+    mail.init_app(app)
 
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(catalog_bp, url_prefix="/catalog")
