@@ -214,6 +214,56 @@
       ]
     },
     {
+      "_id": "folder_users",
+      "_type": "request_group",
+      "name": "👤 Users",
+      "parentId": "wrk_backend_biblioteca"
+    },
+    {
+      "_id": "req_update_profile",
+      "_type": "request",
+      "name": "Update Profile",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/users/profile",
+      "parentId": "folder_users",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        },
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"full_name\": \"Nuevo Nombre\",\n  \"email\": \"newemail@example.com\"\n}"
+      }
+    },
+    {
+      "_id": "req_get_user_profile",
+      "_type": "request",
+      "name": "Get User Profile",
+      "method": "GET",
+      "url": "{{ _.base_url }}/users/1",
+      "parentId": "folder_users"
+    },
+    {
+      "_id": "req_deactivate_account",
+      "_type": "request",
+      "name": "Deactivate Account",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/users/account",
+      "parentId": "folder_users",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ]
+    },
+    {
       "_id": "folder_health",
       "_type": "request_group",
       "name": "❤️ Health",
