@@ -4,6 +4,7 @@ from .config import Config
 from .auth.routes import bp as auth_bp
 from .catalog.routes import bp as catalog_bp
 from .reservations.routes import bp as res_bp
+from .users.routes import bp as users_bp
 from .common.models import create_all_tables
 
 def create_app(config_obj=Config):
@@ -17,6 +18,7 @@ def create_app(config_obj=Config):
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(catalog_bp, url_prefix="/catalog")
     app.register_blueprint(res_bp, url_prefix="/reservations")
+    app.register_blueprint(users_bp, url_prefix="/users")
 
     # Auto create tables (for demo/dev; replace with Alembic in prod)
     with app.app_context():
